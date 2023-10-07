@@ -107,6 +107,8 @@ int main()
 		 else if (chose == 1)
 		 {
 		 	s.file_add(); 
+		 	sb.file_add();
+		 	chs.file_add();
 		 	cout << "导入数据成功" << endl;	
 		 }
 		 else if (chose == 2)
@@ -191,6 +193,8 @@ int main()
 		 else if (chose == 8)
 		 {
 		 	s.save();
+		 	sb.save();
+		 	chs.save();
 		 }
 	}
 	return 0;

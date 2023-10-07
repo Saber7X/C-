@@ -40,53 +40,13 @@ void student::file_add()//一键添加所有文件
 		while (readFile >>id >> name >> sex >> age)
 		{
 //			cout << id << endl << name << endl;
-			student::mark(id); 
+			mark(id); 
 	 		stu[id] = {id, name, sex, age};
 		}
 	}
 	else
 	{
 		cout << "学生名单打开失败！" << endl;
-	}
- 
-	readFile.close();
-	
-	readFile.open("课程信息.txt", ios::in);
- 
-	if (readFile.is_open())
-	{
-		cout << "课程信息打开成功！" << endl;
-		int p, id;
-		string name;
-		while (readFile >> id >> name >> p)
-		{
-//			cout << id << endl << name << endl;
-			subject.mark(id); 
-	 		sub[id] = {id, name, p};
-		}
-	}
-	else
-	{
-		cout << "文件打开失败！" << endl;
-	}
- 
-	readFile.close();
-	
-	readFile.open("选课信息.txt", ios::in);
- 
-	if (readFile.is_open())
-	{
-		cout << "选课信息打开成功！" << endl;
-		int id1, id2;
-		while (readFile >>id1 >> id2 >> p)
-		{
-//			cout << id << endl << name << endl;
-			choose::mark({id1, id2}, p); 
-		}
-	}
-	else
-	{
-		cout << "文件打开失败！" << endl;
 	}
  
 	readFile.close();
@@ -217,11 +177,11 @@ void student::save()
 		{
 			if (i.st_id != -1)
 			{
-				cout << "学号：" << i.st_id << endl;
-				cout << "姓名：" << i.st_name << endl;
-				cout << "性别：" << i.st_sex << endl;
-				cout << "年龄：" << i.st_age << endl;
-				cout << endl; 
+//				cout << "学号：" << i.st_id << endl;
+//				cout << "姓名：" << i.st_name << endl;
+//				cout << "性别：" << i.st_sex << endl;
+//				cout << "年龄：" << i.st_age << endl;
+//				cout << endl; 
 				myFile << i.st_id << endl << i.st_name << endl << i.st_sex << endl << i.st_age << endl << endl;
 			}
 		}	

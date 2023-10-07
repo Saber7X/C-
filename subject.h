@@ -14,12 +14,37 @@ public:
 	void mark(int id);//标记课程存在 
 	void get();//获取所有课程信息 
 	void save();//一键保存数据 
-	friend void student::file_add();
+	void file_add();
 private:
 	vector<sb> sub = vector<sb> (105, {-1, "", 0});
 	bool flag[105]={0};
 };
-
+void subject::file_add()//一键添加所有文件 
+{
+	ifstream readFile;
+	
+	readFile.open("课程信息.txt", ios::in);
+ 
+	if (readFile.is_open())
+	{
+		cout << "课程信息打开成功！" << endl;
+		int p, id;
+		string name;
+		while (readFile >> id >> name >> p)
+		{
+//			cout << id << endl << name << endl;
+			mark(id); 
+	 		sub[id] = {id, name, p};
+		}
+	}
+	else
+	{
+		cout << "文件打开失败！" << endl;
+	}
+ 
+	readFile.close();
+	
+}
 void subject::add()
 {
 	int id;
@@ -164,6 +189,32 @@ void subject::edit()
 		 {
 		 	 cout << "该课程不存在" << endl;
 		 }
+	}
+}
+void subject::save()
+{
+	fstream myFile;
+	myFile.open("课程信息.txt", ios::out);  // write,清空再写入
+	if (myFile.is_open())
+	{ 
+		for (auto i : sub)
+		{
+			if (i.sb_id != -1)
+			{
+//				cout << "学号：" << i.st_id << endl;
+//				cout << "姓名：" << i.st_name << endl;
+//				cout << "性别：" << i.st_sex << endl;
+//				cout << "年龄：" << i.st_age << endl;
+//				cout << endl; 
+				myFile << i.sb_id << endl << i.sb_name << endl << i.sb_point << endl << endl;
+			}
+		}	
+		cout << "保存成功" << endl; 
+		myFile.close();
+	}
+	else
+	{
+		cout << "保存失败" << endl; 
 	}
 }
 //vector<int> student::get()

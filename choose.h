@@ -17,11 +17,34 @@ public:
 	bool check(ch f);//查找该记录是否存在 
 	void mark(ch f, int p);//标记录存在 
 	void get();//获取所有选课记录 
-	friend void student::file_add();
+	void file_add();
+	void save();
 private:
 	map<ch, int> cho;
 };
-
+void choose::file_add()//一键添加所有文件 
+{
+	ifstream readFile;
+	
+	readFile.open("选课信息.txt", ios::in);
+ 
+	if (readFile.is_open())
+	{
+		cout << "选课信息打开成功！" << endl;
+		int id1, id2, p;
+		while (readFile >>id1 >> id2 >> p)
+		{
+//			cout << id << endl << name << endl;
+			mark({id1, id2}, p); 
+		}
+	}
+	else
+	{
+		cout << "文件打开失败！" << endl;
+	}
+ 
+	readFile.close();
+}
 void choose::add(student s1, subject s2)
 {
 	int id1, id2;
@@ -69,7 +92,8 @@ void choose::add(student s1, subject s2)
 bool choose::check(ch f)
 {
 	int x = cho[f];
-	return x != 0;
+	if (x == 0) return false;
+	else return true;
 }
 
 void choose::mark(ch f, int p)
@@ -133,6 +157,27 @@ void choose::edit()
 	 {
 	 	 cout << "该记录不存在" << endl;
 	 }
+}
+void choose::save()
+{
+	fstream myFile;
+	myFile.open("选课信息.txt", ios::out);  // write,清空再写入
+	if (myFile.is_open())
+	{ 
+		for (auto i : cho)
+		{
+			if (i.second != 0)
+			{
+				myFile << i.first.st_id << endl<< i.first.sb_id << endl<< i.second << endl << endl;
+			}
+		}
+		cout << "保存成功" << endl; 
+		myFile.close();
+	}
+	else
+	{
+		cout << "保存失败" << endl; 
+	}
 }
 //vector<int> student::get()
 //{

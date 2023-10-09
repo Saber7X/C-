@@ -7,7 +7,7 @@ struct sb{ //课程信息
 class subject{
 public:
 	void add(); //添加一个课程信息 
-	void del(int id); //删除指定课程 
+	int del(int id); //删除指定课程 
 	void edit(); //修改指定课程
 	void show(); //展示指定课程 
 	bool check(int id);//查找该课程是否存在 
@@ -132,7 +132,7 @@ void subject::get()
 	cout << endl;
 }
 
-void subject::del(int id)
+int subject::del(int id)
 {
 	if (check(id) && id >= 1 && id <= 100)
 	{
@@ -140,10 +140,12 @@ void subject::del(int id)
 		sub[id].sb_name = "";
 		sub[id].sb_point = 0;
 		flag[id] = 0;
-		cout << "删除成功！\n\n"; 
+		cout << "删除成功！\n\n";
+		return 1;
 	}
 	else cout << "输入有误， 请重新输入" << endl;
-	cout << endl; 
+	cout << endl;
+	return 0; 
 }
 
 void subject::edit()

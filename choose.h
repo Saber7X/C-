@@ -19,6 +19,9 @@ public:
 	void get();//获取所有选课记录 
 	void file_add();
 	void save();
+	
+	void delete_s(int id); //当一个学生信息被删除时，他的选课信息也要被删除
+	void delete_sb(int id);//当一个课程信息被删除时，选了它的记录也要被删除 
 private:
 	map<ch, int> cho;
 };
@@ -179,15 +182,25 @@ void choose::save()
 		cout << "保存失败" << endl; 
 	}
 }
-//vector<int> student::get()
-//{
-//	vector <int> num;
-//	for (int i = 1; i <= 100; i ++ )
-//	{
-//		if (check(i)) num.push_back(i);
-//	}
-//	return num;
-// } 
-//	
+void choose::delete_s(int id) //当一个学生信息被删除时，他的选课信息也要被删除
+{
+	for (auto i : cho)
+	{
+		if (i.first.st_id == id)
+		{
+			del(i.first.st_id, i.first.sb_id);
+		}
+	 } 
+}
+void choose::delete_sb(int id)//当一个课程信息被删除时，选了它的记录也要被删除 
+{
+	for (auto i : cho)
+	{
+		if (i.first.sb_id == id)
+		{
+			del(i.first.st_id, i.first.sb_id);
+		}
+	 } 
+}
 
 

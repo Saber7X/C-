@@ -11,7 +11,7 @@ struct st{ //学生姓名
 class student{
 public:
 	void add(); //添加一个学生信息 
-	void del(int id); //删除指定学生 
+	int del(int id); //删除指定学生 
 	void edit(); //修改指定学生 
 	void show(); //展示指定学生 
 	bool check(int id);//查找该学生是否存在 
@@ -19,6 +19,7 @@ public:
 	void get();//获取所有学生学号 
 	void save();//一键保存数据 
 	void file_add();//一键添加所有文件 
+	friend void delete_s(int id); //当一个学生信息被删除时，他的选课信息也要被删除
 private:
 	vector<st> stu = vector<st> (105, {-1, "", "", 0});
 	bool flag[105]={0};
@@ -151,7 +152,7 @@ void student::get()
 	cout << endl;
 }
 
-void student::del(int id)
+int student::del(int id)
 {
 	cout << "请输入学号，1-100之间" ;
 	if (check(id) && id >= 1 && id <= 100)
@@ -162,9 +163,11 @@ void student::del(int id)
 		stu[id].st_age = -1; 
 		flag[id] = -1;
 		cout << "删除成功！\n\n"; 
+		return 1;
 	}
 	else cout << "输入有误， 请重新输入" << endl;
 	cout << endl; 
+	return 0;
 }
 
 void student::save()

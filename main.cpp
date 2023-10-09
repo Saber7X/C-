@@ -145,14 +145,22 @@ int main()
 				cout << "输入你想删除的学生学号：" << endl; 
 			 	int id;
 			 	cin >> id;
-			 	s.del(id);
+			 	int xx = s.del(id);
+			 	if (xx == 1)
+			 	{
+			 		chs.delete_s(id);
+				}
 			}
 			else if (f == 2)
 			{
 				cout << "输入你想删除的课程号：" << endl; 
 			 	int id;
 			 	cin >> id;
-			 	sb.del(id);
+			 	int xx = sb.del(id);
+			 	if (xx == 1)
+			 	{
+			 		chs.delete_sb(id);
+				}
 			}
 			else if (f == 3)
 			{

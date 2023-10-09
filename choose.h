@@ -57,21 +57,50 @@ void choose::add(student s1, subject s2)
 	{
 		cout << "请输入学号：（学号是1-100的整数，输入0退出添加）\n";
 		cin >> id1; 
-		if (id1 >= 1 && id1 <= 100 && s1.check(id1)) break;
-		if (id1 == 0) goto EXIT;
-		if (id1 < 0 && id1 > 100) cout << "无效课程号，请重新输入\n";
-		else  cout << "输入有误，请重新输入\n";
-	 } 
-
-	while(1)
-	{
+		if (id1 >= 1 && id1 <= 100 && s1.check(id1))
+		{
+			
+		}
+		else if (id1 == 0) goto EXIT;
+		else if (id1 < 0 && id1 > 100) 
+		{
+			cout << "无效课程号，请重新输入\n";
+			continue;
+		}
+		else  
+		{
+			cout << "输入有误，请重新输入\n";
+			continue;
+		}
+		
 		cout << "请输入课程号：（课程号是1-100的整数，输入0退出添加）\n";
 		cin >> id2; 
-		if (id2 >= 1 && id2 <= 100 && s2.check(id2)) break;
-		if (id2 == 0) goto EXIT;
-		if (id2 < 0 && id2 > 100) cout << "无效课程号，请重新输入\n";
-		else  cout << "输入有误，请重新输入\n";
+		if (id2 >= 1 && id2 <= 100 && s2.check(id2))
+		{
+			
+		}
+		else if (id2 == 0) goto EXIT;
+		else if (id2 < 0 && id2 > 100) 
+		{
+			cout << "无效课程号，请重新输入\n";
+			continue;
+		}
+		else  
+		{
+			cout << "输入有误，请重新输入\n";
+			continue;
+		}
+		if (check({id1, id2}))
+		{
+			cout << "该选课记录已存在，请重新输入" << endl;
+			continue;
+		}
+		else
+		{
+			break;
+		}
 	 } 
+	 
 	while(1)
 	{
 		cout << "请输入成绩：（成绩是1-100的整数，输入0退出添加）\n";
@@ -86,6 +115,7 @@ void choose::add(student s1, subject s2)
 	 if (s == 1)
 	 {
 	 	mark({id1, id2}, point); 
+	 	cout << "保存成功！"  << endl << endl; 
 	} 
 	EXIT:
 		cout << "退出添加\n";
@@ -122,9 +152,12 @@ void choose::show()
 
 void choose::get()
 {
-	cout << "请输入学号和课程号，1-100之间\n" ;
+	cout << "输入学号和课程号\n"; 
+	cout << "请输入学号：（1-100之间）\n" ;
 	int id1, id2;
-	cin >> id1 >> id2;
+	cin >> id1;
+	cout << "请输入课程号：（1-100之间）\n" ;
+	cin >> id2;
 	if (cho[{id1, id2}] != 0)
 	{
 		cout << "学号：" << id1 << endl;
@@ -143,8 +176,12 @@ void choose::del(int id1, int id2)
 
 void choose::edit()
 {
-	cout << "请输入要修改的选修记录：" << endl;
-	int id1, id2; cin >> id1 >> id2;
+	cout << "输入学号和课程号\n"; 
+	cout << "请输入学号：（1-100之间）\n" ;
+	int id1, id2;
+	cin >> id1;
+	cout << "请输入课程号：（1-100之间）\n" ;
+	cin >> id2;
 	if (check({id1, id2}))
 	{
 		int point;
@@ -153,12 +190,12 @@ void choose::edit()
 		if (point >= 1 && point <= 100)
 		{
 			cho[{id1, id2}] = point;
-			cout << "修改成功！" << endl; 
+			cout << "修改成功！" << endl << endl; 
 		}
 	 } 
 	 else
 	 {
-	 	 cout << "该记录不存在" << endl;
+	 	 cout << "该记录不存在" << endl << endl;
 	 }
 }
 void choose::save()
@@ -174,7 +211,7 @@ void choose::save()
 				myFile << i.first.st_id << endl<< i.first.sb_id << endl<< i.second << endl << endl;
 			}
 		}
-		cout << "保存成功" << endl; 
+		cout << "保存成功！" << endl; 
 		myFile.close();
 	}
 	else

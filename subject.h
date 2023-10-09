@@ -1,7 +1,7 @@
 struct sb{ //课程信息 
-	int sb_id;
-	string sb_name;
-	int sb_point;
+	int sb_id; //课程号 
+	string sb_name; //课程名 
+	int sb_point;//学分 
 };
 
 class subject{
@@ -14,20 +14,20 @@ public:
 	void mark(int id);//标记课程存在 
 	void get();//获取所有课程信息 
 	void save();//一键保存数据 
-	void file_add();
+	void file_add(); //文件导入 
 private:
-	vector<sb> sub = vector<sb> (105, {-1, "", 0});
+	vector<sb> sub = vector<sb> (105, {-1, "", 0}); //课程号、课程名、学分 
 	bool flag[105]={0};
 };
+
 void subject::file_add()//一键添加所有文件 
 {
 	ifstream readFile;
-	
 	readFile.open("课程信息.txt", ios::in);
  
 	if (readFile.is_open())
 	{
-		cout << "课程信息打开成功！" << endl;
+		cout << "课程信息导入成功！" << endl;
 		int p, id;
 		string name;
 		while (readFile >> id >> name >> p)
@@ -39,7 +39,7 @@ void subject::file_add()//一键添加所有文件
 	}
 	else
 	{
-		cout << "文件打开失败！" << endl;
+		cout << "文件导入失败！" << endl;
 	}
  
 	readFile.close();
@@ -64,7 +64,7 @@ void subject::add()
 
 	while(1)
 	{
-		cout << "请输入课程名\n课程名长度不超过50\n输入0退出添加学生\n";
+		cout << "请输入课程名：（课程名长度不超过50，输入0退出添加学生）\n";
 		cin >> name; 
 		if (name == "0") goto EXIT;
 		if (name.length() >= 1 && id <= 50) break;
@@ -85,6 +85,7 @@ void subject::add()
 	 {
 	 	mark(id); 
 	 	sub[id] = {id, name, point};
+	 	cout << "保存成功！" << endl; 
 	} 
 	EXIT:
 		cout << "退出添加\n";
@@ -150,7 +151,7 @@ int subject::del(int id)
 
 void subject::edit()
 {
-	cout << "请输入您想修改的信息：（学号不可更改）" << endl;
+	cout << "请输入您要修改的信息：（学号不可更改）" << endl;
 	cout << "1 - 课程名" << endl;
 	cout << "2 - 学分" << endl;
 	int f; cin >> f;
@@ -185,7 +186,7 @@ void subject::edit()
 				sub[id].sb_point = point;
 				cout << "修改成功！" << endl; 
 			}
-			else cout << "请输入有效学分" << endl; 
+			else cout << "输入学分无效" << endl; 
 		 } 
 		 else
 		 {

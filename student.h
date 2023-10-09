@@ -2,10 +2,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct st{ //学生姓名 
-	int st_id;
-	string st_name;
-	string st_sex;
-	int st_age;
+	int st_id; //学号 （1-100） 
+	string st_name; //姓名 
+	string st_sex; //性别（男、女） 
+	int st_age; //年龄（1-100） 
 };
 
 class student{
@@ -21,11 +21,9 @@ public:
 	void file_add();//一键添加所有文件 
 	friend void delete_s(int id); //当一个学生信息被删除时，他的选课信息也要被删除
 private:
-	vector<st> stu = vector<st> (105, {-1, "", "", 0});
-	bool flag[105]={0};
+	vector<st> stu = vector<st> (105, {-1, "", "", 0}); //学号、姓名、性别、年龄，下标是学号 
+	bool flag[105]={0}; //标记该学号是否存在 
 };
-
-
 
 void student::file_add()//一键添加所有文件 
 {
@@ -34,7 +32,7 @@ void student::file_add()//一键添加所有文件
  
 	if (readFile.is_open())
 	{
-		cout << "学生名单打开成功！" << endl;
+		cout << "学生名单导入成功！" << endl;
 		int id;
 		string name, sex;
 		int age;
@@ -47,9 +45,9 @@ void student::file_add()//一键添加所有文件
 	}
 	else
 	{
-		cout << "学生名单打开失败！" << endl;
+		cout << "学生名单导入失败！" << endl;
 	}
- 
+
 	readFile.close();
 }
 void student::add()
@@ -65,14 +63,14 @@ void student::add()
 		cin >> id; 
 		if (id >= 1 && id <= 100 && !check(id)) break;
 		if (id == 0) goto EXIT;
-		if (id < 0 && id > 100) cout << "无效学号，请重新输入\n";
-		else if (check(id)) cout << "该学号已存在，请重新输入\n";
-		else  cout << "输入有误，请重新输入\n";
+		if (id < 0 && id > 100) cout << "无效学号，请重新输入：\n";
+		else if (check(id)) cout << "该学号已存在，请重新输入：\n";
+		else cout << "输入有误，请重新输入：\n";
 	 } 
 
 	while(1)
 	{
-		cout << "请输入学生姓名\n姓名长度不超过20\n输入0退出添加学生\n";
+		cout << "请输入学生姓名：（姓名长度不超过20，输入0退出添加）\n";
 		cin >> name; 
 		if (name == "0") goto EXIT;
 		if (name.length() >= 1 && id <= 20) break;
@@ -80,13 +78,12 @@ void student::add()
 	} 
 	while(1)
 	{
-		cout << "请输入学生性别\n请输入“男”或“女”\n输入0退出添加学生\n";
+		cout << "请输入学生性别（“男”或“女”，输入0退出添加学生）\n";
 		cin >> sex; 
 		if (sex == "0") goto EXIT;
 		if (sex == "男" || sex == "女") break;
 		else  cout << "输入有误，请重新输入\n";
 	} 	
-
 	while(1)
 	{
 		cout << "请输入学生年龄：（年龄是1-100的整数，输入0退出添加）\n";
@@ -95,13 +92,14 @@ void student::add()
 		if (age >= 1 && age <= 100) break;
 		else  cout << "输入有误，请重新输入\n";
 	 } 
-	 cout << "输入成功！（输入1保存该学生，输入0取消保存）\n";
+	 cout << "输入成功！\n输入1保存该学生，输入0取消保存\n";
 	 
 	 cin >> s;
 	 if (s == 1)
 	 {
 	 	mark(id); 
 	 	stu[id] = {id, name, sex, age};
+	 	cout << "保存成功！" << endl; 
 //	 	cout <<  check(id) << endl;
 	} 
 	EXIT:
@@ -154,7 +152,7 @@ void student::get()
 
 int student::del(int id)
 {
-	cout << "请输入学号，1-100之间" ;
+	cout << "请输入学号：（1-100之间）" ;
 	if (check(id) && id >= 1 && id <= 100)
 	{
 		stu[id].st_id = -1;
@@ -199,14 +197,14 @@ void student::save()
 
 void student::edit()
 {
-	cout << "请输入您想修改的信息：（学号不可更改）" << endl;
+	cout << "请输入您要修改的信息：（学号不可更改）" << endl;
 	cout << "1 - 姓名" << endl;
 	cout << "2 - 性别" << endl;
 	cout << "3 - 年龄" << endl;
 	int f; cin >> f;
 	if (f == 1)
 	{
-		cout << "请输入要求改学生的学号：" << endl;
+		cout << "请输入要修改学生的学号：" << endl;
 		int id; cin >> id;
 		if (check(id))
 		{
@@ -223,7 +221,7 @@ void student::edit()
 	} 
 	else if (f == 2)
 	{
-		cout << "请输入要求改学生的学号：" << endl;
+		cout << "请输入要修改学生的学号：" << endl;
 		int id; cin >> id;
 		if (check(id))
 		{
@@ -245,7 +243,7 @@ void student::edit()
 	}
 	else if (f == 3)
 	{
-		cout << "请输入要求改学生的学号：" << endl;
+		cout << "请输入修改学生的学号：" << endl;
 		int id; cin >> id;
 		if (check(id))
 		{
